@@ -1,3 +1,5 @@
+import javax.swing.ProgressMonitor
+
 import scala.collection.immutable.Queue
 
 /**
@@ -27,9 +29,12 @@ object Main extends App {
 	var program = Queue[ProgramEntry](
 		new ProgramEntry.data(new StackEntry("int32", 4)),
 		new ProgramEntry.data(new StackEntry("int32", 2)),
-		new ProgramEntry.skip(1),
 		new ProgramEntry.add,
-		new ProgramEntry.add
+		new ProgramEntry.data(new StackEntry("int32", 6)),
+		new ProgramEntry.equal,
+		new ProgramEntry.then,
+		new ProgramEntry.skip(1),
+			new ProgramEntry.data(new StackEntry("int32", 42))
 	)
 	println(program)
 	test.execute(program)

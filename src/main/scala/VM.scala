@@ -13,6 +13,7 @@ class VM {
 	def data(stackEntry: StackEntry): Unit = stack.push(stackEntry)
 	def nop(): Unit = {}
 	def skip(amount: Int): Int = amount
+	def then(): Int = if (stack.pop().getData.asInstanceOf[Boolean]) 1 else 0
 
 	def executeOnce(programEntry: ProgramEntry): Int = {
 		var toSkip = 0
@@ -23,6 +24,7 @@ class VM {
 			case e: ProgramEntry.equal => this.equal()
 			case e: ProgramEntry.data => this.data(e.data)
 			case e: ProgramEntry.skip => toSkip = this.skip(e.instructions)
+			case e: ProgramEntry.then => toSkip = this.then()
 		}
 		toSkip
 	}

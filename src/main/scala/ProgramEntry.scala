@@ -23,5 +23,8 @@ object ProgramEntry {
 		def instructions = number
 		override def toString: String = s"ProgramEntry.skip($number)"
 	}
+	class then() extends ProgramEntry {
+		override def toString: String = s"ProgramEntry.then"
+	}
 }
 
