@@ -1,3 +1,5 @@
+package uk.co.skyem.random.stack1
+
 /**
  * An entry on the stack
  */

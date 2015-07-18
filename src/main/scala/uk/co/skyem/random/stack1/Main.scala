@@ -1,7 +1,9 @@
-import ProgramEntry._
-import StackEntry._
+package uk.co.skyem.random.stack1
 
 import scala.collection.immutable.Queue
+
+import uk.co.skyem.random.stack1.ProgramEntry._
+import uk.co.skyem.random.stack1.StackEntry._
 
 /**
  * Main entry point of the program
@@ -10,12 +12,12 @@ object Main extends App {
 	val test = new VM()
 	/*
 	println(test.stack)
-	test.stack.push(new StackEntry("32int", 42))
-	test.stack.push(new StackEntry("32int", 42))
+	test.stack.push(new uk.co.skyem.random.stack1.StackEntry("32int", 42))
+	test.stack.push(new uk.co.skyem.random.stack1.StackEntry("32int", 42))
 	println(test.stack)
 	test.add()
 	println(test.stack)
-	test.stack.push(new StackEntry("32int", 84))
+	test.stack.push(new uk.co.skyem.random.stack1.StackEntry("32int", 84))
 	println(test.stack)
 	test.equal()
 	println(test.stack)
@@ -29,7 +31,7 @@ object Main extends App {
 	*/
 
 	/*
-	var program = Queue[ProgramEntry](
+	var program = Queue[uk.co.skyem.random.stack1.ProgramEntry](
 		data(stackEntry("int32", 4)),
 		data(stackEntry("int32", 2)),
 		add,
@@ -46,7 +48,6 @@ object Main extends App {
 	test.stack.clear()
 	*/
 
-
 	var program = Queue[ProgramEntry](
 		data(stackEntry("int32", 4)),
 		save,
@@ -58,7 +59,8 @@ object Main extends App {
 		dup
 	)
 	println(program)
-	test(program)
+	test <<< program
+	test << (save, skip(1), ret, call)
 	println(test.stack)
 
 }
