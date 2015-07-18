@@ -4,15 +4,18 @@ abstract class ProgramEntry {
 
 object ProgramEntry {
 
-	def nop: ProgramEntry.nop = new nop
-	def add: ProgramEntry.add = new add
-	def sub: ProgramEntry.sub = new sub
 	def data(entry: StackEntry) = new data(entry)
-	def skip(amount: Int) = new skip(amount)
-	def so: ProgramEntry.so = new so
-	def equal: ProgramEntry.equal = new equal
-	def save: ProgramEntry.save = new save
-	def load: ProgramEntry.load = new load
+	def skip(amount: Int)       = new skip(amount)
+	def nop   = new nop
+	def add   = new add
+	def sub   = new sub
+	def so    = new so
+	def equal = new equal
+	def save  = new save
+	def load  = new load
+	def call  = new call
+	def dup   = new dup
+	def ret   = new ret
 
 	class nop extends ProgramEntry {
 		override def toString: String = s"ProgramEntry.nop"
@@ -42,6 +45,15 @@ object ProgramEntry {
 	}
 	class load extends ProgramEntry {
 		override def toString: String = s"ProgramEntry.load"
+	}
+	class call extends ProgramEntry {
+		override def toString: String = s"ProgramEntry.call"
+	}
+	class dup extends ProgramEntry {
+		override def toString: String = s"ProgramEntry.dup"
+	}
+	class ret extends ProgramEntry {
+		override def toString: String = s"ProgramEntry.ret"
 	}
 }
 

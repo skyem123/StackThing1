@@ -51,10 +51,11 @@ object Main extends App {
 		data(stackEntry("int32", 4)),
 		save,
 		skip(3),
-			data(stackEntry("int32", 2)),
+			dup,
 			add,
-			skip(2),
-		load
+			ret,
+		call,
+		dup
 	)
 	println(program)
 	test(program)
