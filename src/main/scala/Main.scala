@@ -19,26 +19,45 @@ object Main extends App {
 	println(test.stack)
 	test.equal()
 	println(test.stack)
-	*/
+
 
 	test.stack.push(stackEntry("int32", 1))
 	test.stack.push(stackEntry("int32", 1))
 	test.add()
 	println(test.stack)
 	test.stack.clear()
+	*/
 
+	/*
 	var program = Queue[ProgramEntry](
 		data(stackEntry("int32", 4)),
 		data(stackEntry("int32", 2)),
 		add,
 		data(stackEntry("int32", 6)),
 		equal,
-		then,
+		so,
 		skip(1),
 			data(stackEntry("int32", 42))
-
 	)
 	println(program)
 	test(program)
 	println(test.stack)
+
+	test.stack.clear()
+	*/
+
+
+	var program = Queue[ProgramEntry](
+		data(stackEntry("int32", 4)),
+		save,
+		skip(3),
+			data(stackEntry("int32", 2)),
+			add,
+			skip(2),
+		load
+	)
+	println(program)
+	test(program)
+	println(test.stack)
+
 }

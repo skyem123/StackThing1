@@ -1,5 +1,5 @@
-class ProgramEntry {
-	override def toString: String = s"ProgramEntry"
+abstract class ProgramEntry {
+	override def toString: String
 }
 
 object ProgramEntry {
@@ -9,8 +9,10 @@ object ProgramEntry {
 	def sub: ProgramEntry.sub = new sub
 	def data(entry: StackEntry) = new data(entry)
 	def skip(amount: Int) = new skip(amount)
-	def then: ProgramEntry.then = new then
+	def so: ProgramEntry.so = new so
 	def equal: ProgramEntry.equal = new equal
+	def save: ProgramEntry.save = new save
+	def load: ProgramEntry.load = new load
 
 	class nop extends ProgramEntry {
 		override def toString: String = s"ProgramEntry.nop"
@@ -32,8 +34,14 @@ object ProgramEntry {
 		def instructions = number
 		override def toString: String = s"ProgramEntry.skip($number)"
 	}
-	class then extends ProgramEntry {
-		override def toString: String = s"ProgramEntry.then"
+	class so extends ProgramEntry {
+		override def toString: String = s"ProgramEntry.so"
+	}
+	class save extends ProgramEntry {
+		override def toString: String = s"ProgramEntry.save"
+	}
+	class load extends ProgramEntry {
+		override def toString: String = s"ProgramEntry.load"
 	}
 }
 
