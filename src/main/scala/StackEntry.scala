@@ -24,3 +24,7 @@ class StackEntry(entryType: String, entryData: Any) {
 	override def toString: String = s"StackEntry($entryType, $entryData)"
 
 }
+
+object StackEntry {
+	def stackEntry(entryType: String, entryData: Any): StackEntry = new StackEntry(entryType, entryData)
+}
