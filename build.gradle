@@ -31,7 +31,4 @@ dependencies {
     compile 'org.scala-lang:scala-library:2.11.7'
 }
 
-build {
-    tasks.shadowJar.execute()
-}
-
+build.dependsOn += "shadowJar"
