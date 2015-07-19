@@ -5,10 +5,12 @@
  */
 
 
-// Apply the scala plugin to add support for Scala
-apply plugin: 'scala'
-apply plugin: 'eclipse'
-apply plugin: 'application'
+plugins {
+    id 'scala'
+    id 'eclipse'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '1.2.2'
+}
 
 group = 'uk.co.skyem.random'
 mainClassName = 'uk.co.skyem.random.stack1.Main'
@@ -21,13 +23,15 @@ jar {
 
 // In this section you declare where to find the dependencies of your project
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     mavenCentral()
 }
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
     compile 'org.scala-lang:scala-library:2.11.7'
+}
+
+build {
+    tasks.shadowJar.execute()
 }
 
