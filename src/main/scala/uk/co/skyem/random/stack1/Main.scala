@@ -47,7 +47,7 @@ object Main extends App {
 
 	test.stack.clear()
 	*/
-
+	/*
 	var program = Queue[ProgramEntry](
 		data(stackEntry("int32", 4)),
 		save,
@@ -63,5 +63,17 @@ object Main extends App {
 	test <<< program
 	test << (save, skip(1), ret, call)
 	println(test.stack)
+	*/
+	StringParser.parseString(
+		"""
+		  |data int32 4
+		  |save; skip 3
+		  | data int32 2
+		  | add
+		  | ret
+		  |call
+		  |data int32 42
+		  |swp
+		""".stripMargin)
 
 }
