@@ -66,13 +66,14 @@ object Main extends App {
 	*/
 	StringParser.parseString(
 		"""
-		  |data int32 4
-		  |save; skip 3
+		  |data int32 4 // this is a comment!
+		  |save; skip 4; nop
 		  | data int32 2
 		  | add
 		  | ret
 		  |call
-		  |data int32 42
+		  |data string "This is a string! // heh" // yay
+		  |data string "This is another string! ; no split"
 		  |swp
 		""".stripMargin)
 
