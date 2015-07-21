@@ -47,7 +47,7 @@ object Main extends App {
 
 	test.stack.clear()
 	*/
-	/*
+
 	var program = Queue[ProgramEntry](
 		data(stackEntry("int32", 4)),
 		save,
@@ -63,7 +63,9 @@ object Main extends App {
 	test <<< program
 	test << (save, skip(1), ret, call)
 	println(test.stack)
-	*/
+
+	/*
+	println(ProgramEntry.instructions)
 	StringParser.parseString(
 		"""
 		  |data int32 4 // this is a comment!
@@ -76,5 +78,5 @@ object Main extends App {
 		  |data string "This is another string! ; no split"
 		  |swp
 		""".stripMargin)
-
+		*/
 }

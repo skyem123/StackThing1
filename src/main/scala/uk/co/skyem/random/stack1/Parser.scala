@@ -12,21 +12,22 @@ object ByteParser extends Parser {
 
 object StringParser extends Parser {
 	val STRING = "'.*'|\".*\"".r //TODO: Handle things like \"
-	val STATEMENT_MARKER = ";".r
+	val STATEMENT_MARKER = ";"
 	val COMMENT_MARKER = "\\/\\/".r
 	// Comments are in group 2
 	val COMMENT_PATTERN = s"($STRING)|($COMMENT_MARKER.*)".r
 	// end statement markers are in group 2
-	val STATEMENT_SPLIT_PATTERN = s"($STRING)|($STATEMENT_MARKER)".r
+	val LINE_SPLIT_PATTERN = s"($STRING)|($STATEMENT_MARKER)".r
+	val STATEMENT_SPLIT_PATTERN = "\\s".r
 
 	def parseString(string: String) = {
 		string.split('\n').foreach((raw_line) => {
 			// Now we have all the lines, remove all comments,
-			val line = COMMENT_PATTERN.replaceAllIn(raw_line, "$1") + ';' // Replace everything matched with just the first group so the second group will be deleted
+			val line = COMMENT_PATTERN.replaceAllIn(raw_line, "$1") + STATEMENT_MARKER // Replace everything matched with just the first group so the second group will be deleted
 			//println(line)
 			// then take this line without comments and split it up // TODO
 			var positions = mutable.Buffer[Int]()
-			STATEMENT_SPLIT_PATTERN.findAllMatchIn(line).foreach(m => {
+			LINE_SPLIT_PATTERN.findAllMatchIn(line).foreach(m => {
 				val position = m.start(2)
 				if (position >= 0) {
 					positions :+= position
@@ -39,11 +40,15 @@ object StringParser extends Parser {
 				if (statement.nonEmpty) {
 					statements :+= line.substring(lastPos, position).trim
 				}
-				lastPos = position + 1 // +1 gets rid of the semicolon
+				lastPos = position + STATEMENT_MARKER.length // make sure to get rid of the semicolon as well
 			})
 			if (statements.nonEmpty) {
 				statements.foreach(statement => {
 					println(statement)
+					// First split the statements up into parts
+					val split_statment = STATEMENT_SPLIT_PATTERN.split(statement)
+					val instruction = split_statment.head
+					val arguments = split_statment.tail
 					// TODO: Convert statements into ProgramEntry objects
 				})
 			}
